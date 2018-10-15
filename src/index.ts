@@ -1,18 +1,14 @@
 import {
-  generateHeightMap,
-  heightMapToBlocks,
-  generateCaves,
-} from './generation';
+  MapGenerator,
+  CaveGenerator,
+} from './generation/index';
 import { renderMap } from './render';
 import { getCanvasContext } from './utils';
 
-const heightMap = generateHeightMap({
-  size: 129,
-  level: 0.5,
-  roughness: 0.9,
-});
+const mapGenerator = new MapGenerator();
 
-const map = heightMapToBlocks(heightMap, 80);
+const blankMap = mapGenerator.generate();
+const carvedMap = new CaveGenerator(blankMap).generate();
 
 const ctx = getCanvasContext(1000, 600);
-renderMap(map, ctx);
+renderMap(carvedMap, ctx);
