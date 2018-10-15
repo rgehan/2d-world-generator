@@ -3,6 +3,8 @@ interface HeightMapGenerationSettings {
   roughness: number | Function;
 }
 
+type HeightMap = number[];
+
 /**
  * Generates a 2d map using midpoint displacement.
  * Roughness is decorrelated from the size of the map.
@@ -13,7 +15,7 @@ export function generateHeightMap({
   size,
   roughness,
 }: HeightMapGenerationSettings) {
-  const map = Array(size).fill(0);
+  const map: HeightMap = Array(size).fill(0);
   let stepSize = size - 1;
 
   map[0] = 0.5;
@@ -41,4 +43,8 @@ export function generateHeightMap({
   }
 
   return map;
+}
+
+export function generateCaves(map: HeightMap) {
+  // TODO
 }

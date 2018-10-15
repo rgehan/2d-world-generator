@@ -4,6 +4,8 @@ export function drawHeightMap(
 ) {
   const { width, height } = context.canvas;
 
+  context.clearRect(0, 0, width, height);
+
   context.fillStyle = 'green';
   context.beginPath();
   context.moveTo(0, height);

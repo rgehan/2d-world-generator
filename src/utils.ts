@@ -1,4 +1,4 @@
-export function createCanvas(w: number, h: number): CanvasRenderingContext2D {
+function createCanvasContext(w: number, h: number): CanvasRenderingContext2D {
   const canvas = document.createElement('canvas');
 
   canvas.width = w;
@@ -7,4 +7,12 @@ export function createCanvas(w: number, h: number): CanvasRenderingContext2D {
   document.body.appendChild(canvas);
 
   return canvas.getContext('2d');
+}
+
+export function getCanvasContext(
+  w: number,
+  h: number
+): CanvasRenderingContext2D {
+  const canvas = document.querySelector('canvas');
+  return canvas ? canvas.getContext('2d') : createCanvasContext(w, h);
 }
