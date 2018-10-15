@@ -1,13 +1,18 @@
-import { generateHeightMap, generateCaves } from './generation';
-import { drawHeightMap } from './render';
+import {
+  generateHeightMap,
+  heightMapToBlocks,
+  generateCaves,
+} from './generation';
+import { renderMap } from './render';
 import { getCanvasContext } from './utils';
 
-const map = generateHeightMap({
-  size: 1025,
-  roughness: 0.5,
+const heightMap = generateHeightMap({
+  size: 129,
+  level: 0.5,
+  roughness: 0.9,
 });
 
-const caves = generateCaves(map);
+const map = heightMapToBlocks(heightMap, 80);
 
 const ctx = getCanvasContext(1000, 600);
-drawHeightMap(map, ctx);
+renderMap(map, ctx);

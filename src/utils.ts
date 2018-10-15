@@ -16,3 +16,7 @@ export function getCanvasContext(
   const canvas = document.querySelector('canvas');
   return canvas ? canvas.getContext('2d') : createCanvasContext(w, h);
 }
+
+export function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}

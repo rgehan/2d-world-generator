@@ -1,19 +1,25 @@
-export function drawHeightMap(
-  map: number[],
-  context: CanvasRenderingContext2D
-) {
+import { Map } from './generation';
+
+export function renderMap(map: Map, context: CanvasRenderingContext2D) {
   const { width, height } = context.canvas;
 
+  const blockSize = Math.floor(width / map.length);
+
+  // Clear the screen
   context.clearRect(0, 0, width, height);
 
-  context.fillStyle = 'green';
-  context.beginPath();
-  context.moveTo(0, height);
-  context.lineTo(0, map[0] * height);
-  for (let i = 1; i < map.length; i++) {
-    context.lineTo((i / (map.length - 1)) * width, map[i] * height);
+  for (let x = 0; x < map.length; x++) {
+    for (let y = 0; y < map[x].length; y++) {
+      const blockValue = map[x][y];
+
+      context.fillStyle = blockValue === 1 ? 'green' : 'blue';
+
+      context.fillRect(
+        x * blockSize,
+        height - (y + 1) * blockSize,
+        blockSize,
+        blockSize
+      );
+    }
   }
-  context.lineTo(width, height);
-  context.fill();
-  context.closePath();
 }
