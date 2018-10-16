@@ -9,13 +9,6 @@ type Step = {
   amount: number,
 };
 
-const STEPS: Step[] = [
-  { blockId: Blocks.STONE, size: 0.3, amount: 0.3 },
-  { blockId: Blocks.GOLD, size: 0.08, amount: 0.07 },
-  { blockId: Blocks.COPPER, size: 0.09, amount: 0.085 },
-  { blockId: Blocks.COAL, size: 0.12, amount: 0.1 },
-];
-
 const BLOCKS_WHITELIST = [
   Blocks.DIRT,
 ];
@@ -28,8 +21,8 @@ export class OreGenerator {
     this.map = map;
   }
 
-  generate() {
-    STEPS.forEach(step => this._runStep(step));
+  generate(steps: Step[]) {
+    steps.forEach(step => this._runStep(step));
 
     return this.map;
   }

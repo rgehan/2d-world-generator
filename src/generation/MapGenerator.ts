@@ -5,6 +5,7 @@ interface HeightMapGenerationSettings {
   size: number;
   level: number;
   roughness: number | Function;
+  mapHeight?: number;
 }
 
 type HeightMap = number[];
@@ -15,6 +16,7 @@ export class MapGenerator {
     size,
     level = 0.6,
     roughness = 0.8,
+    mapHeight = 80,
   }: HeightMapGenerationSettings) {
     const heightMap = this._generateHeightMap({
       size: 2 ** size + 1,
@@ -22,7 +24,7 @@ export class MapGenerator {
       roughness,
     });
 
-    return this._convertHeightMapToBlocks(heightMap, 80);
+    return this._convertHeightMapToBlocks(heightMap, mapHeight);
   }
 
   /**

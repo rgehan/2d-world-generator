@@ -59,6 +59,11 @@ const PATTERNS = [
   },
 ];
 
+interface CaveGenerationSettings {
+  count: number,
+  forkCapacity: number,
+};
+
 /**
  * Handles the cave carving logic
  */
@@ -72,12 +77,13 @@ export class CaveGenerator {
     this.map = map;
     this.tracers = [];
 
-    for (let i = 0; i < CaveGenerator.INITIAL_TRACERS_COUNT; i++) {
-      this.tracers.push(this._createRandomTracer());
-    }
   }
 
-  generate() {
+  generate({ count = 10, forkCapacity = 10 }: CaveGenerationSettings) {
+    for (let i = 0; i < count; i++) {
+      this.tracers.push(this._createRandomTracer(forkCapacity));
+    }
+
     while (this.tracers.length !== 0) {
       this.tracers.forEach(tracer => {
         this.trace(tracer);
@@ -139,7 +145,7 @@ export class CaveGenerator {
     }
   }
 
-  _createRandomTracer(): Tracer {
+  _createRandomTracer(forkCapacity: number): Tracer {
     let x: number;
     let y: number;
 
@@ -148,7 +154,7 @@ export class CaveGenerator {
       y = randomBetween(0, this._getHeight());
     } while (!this.inGround(x, y));
 
-    return new Tracer(x, y, 0);
+    return new Tracer(x, y, 0, forkCapacity);
   }
 
   _getWidth() {
@@ -183,13 +189,12 @@ class Tracer {
   pattern = 0;
 
   static FORCE_TURN_AFTER_N_MOVES = 3;
-  static INITIAL_FORK_CAPACITY = 10;
 
   constructor(
     x: number,
     y: number,
     direction: number,
-    forkCapacity = Tracer.INITIAL_FORK_CAPACITY
+    forkCapacity: number,
   ) {
     this.x = x;
     this.y = y;

@@ -2,8 +2,6 @@ import { Map } from './MapGenerator';
 import { Blocks } from '../Blocks';
 import { randomBetween } from '../utils';
 
-const TREE_GEN_PROBA = 0.15;
-
 // prettier-ignore
 const TREE_PATTERNS = [
   [
@@ -40,6 +38,10 @@ const TREE_PATTERNS = [
   ],
 ];
 
+interface TreeGenerationSettings {
+  proba: number,
+};
+
 export class TreeGenerator {
   map: Map;
 
@@ -47,7 +49,7 @@ export class TreeGenerator {
     this.map = map;
   }
 
-  generate() {
+  generate({ proba = 0.15 }: TreeGenerationSettings) {
     const mapWidth = this.map.length;
     const mapHeight = this.map[0].length;
 
@@ -60,7 +62,7 @@ export class TreeGenerator {
       const blockValue = this.map[x][y];
 
       if (blockValue !== Blocks.GRASS) continue;
-      if (Math.random() >= TREE_GEN_PROBA) continue;
+      if (Math.random() >= proba) continue;
 
       this._makeTreeFrom(x, y);
     }

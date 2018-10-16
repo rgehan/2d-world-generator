@@ -6,6 +6,11 @@ type LiquidParticle = {
   y: number;
 };
 
+interface LiquidGenerationSettings {
+  amount: number,
+  iterations: number,
+}
+
 export class LiquidGenerator {
   map: Map;
   particles: LiquidParticle[];
@@ -15,11 +20,11 @@ export class LiquidGenerator {
     this.particles = [];
   }
 
-  generate() {
+  generate({ amount = 1, iterations = 1000 }: LiquidGenerationSettings) {
     // Generate n-thick layer of water on the map
-    this._generateInitialLayer(1);
+    this._generateInitialLayer(amount);
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < iterations; i++) {
       this._updateParticles();
     }
 
