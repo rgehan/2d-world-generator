@@ -8,6 +8,7 @@
     "dev": "parcel serve src/index.html"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.117",
     "parcel-bundler": "^1.10.3",
     "typescript": "^3.1.3"
   },
