@@ -17,7 +17,7 @@ const BLOCKS_COLORS = {
   [Blocks.COPPER]: '#96613c',
   [Blocks.COAL]: '#333333',
   [Blocks.GRASS]: '#4b771f',
-  [Blocks.WATER]: 'blue',
+  [Blocks.WATER]: '#233e84',
 };
 
 export function getBlockColor(block: Blocks) {
