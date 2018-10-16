@@ -82,7 +82,7 @@ export class MapGenerator {
       map[x] = [
         ...Array(steppedHeight - 1).fill(Blocks.DIRT),
         Blocks.GRASS,
-        ...Array(targetHeight - 1 - steppedHeight).fill(Blocks.EMPTY),
+        ...Array(targetHeight - steppedHeight).fill(Blocks.EMPTY),
       ];
     }
 
