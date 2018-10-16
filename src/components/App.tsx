@@ -25,10 +25,10 @@ export class App extends React.Component {
     },
     trees: {
       probability: 0.3,
-    }
+    },
   };
 
-  canvas: HTMLCanvasElement;
+  container: HTMLDivElement;
 
   componentDidMount() {
     this.generateAndRenderMap();
@@ -40,10 +40,8 @@ export class App extends React.Component {
 
   generateAndRenderMap = debounce(() => {
     const config = this.state;
-    const context = this.canvas.getContext('2d');
-
     const { map, backgroundMap } = generate(config);
-    renderMap(map, backgroundMap, context);
+    renderMap(map, backgroundMap, this.container);
   }, 1000);
 
   handleChange = (name: string, value: number) => {
@@ -56,7 +54,10 @@ export class App extends React.Component {
 
     return (
       <div className="App">
-        <canvas className="App__Canvas" ref={node => (this.canvas = node)} />
+        <div
+          className="App__CanvasContainer"
+          ref={node => (this.container = node)}
+        />
         <div className="App__Controls">
           <Slider
             label="Map Size"
@@ -127,6 +128,15 @@ export class App extends React.Component {
             max={2000}
             step={250}
             name="water.iterations"
+            onChange={this.handleChange}
+          />
+          <Slider
+            label="Trees probability"
+            value={trees.probability}
+            min={0}
+            max={1}
+            step={0.1}
+            name="trees.probability"
             onChange={this.handleChange}
           />
         </div>

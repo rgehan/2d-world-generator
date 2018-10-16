@@ -1,5 +1,6 @@
 .App {
-  &__Canvas {
-    width: 100%;
+  &__CanvasContainer {
+    display: flex;
+    justify-content: center;
   }
 }
