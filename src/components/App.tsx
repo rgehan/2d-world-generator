@@ -65,8 +65,34 @@ export class App extends React.Component {
           className="App__CanvasContainer row"
           ref={node => (this.container = node)}
         />
+        <div className="row p-2 flex-row justify-content-end">
+          <div className="ml-2">
+            <a
+              className="github-button"
+              href="https://github.com/rgehan/2d-world-generator/fork"
+              data-icon="octicon-repo-forked"
+              data-size="large"
+              data-show-count="false"
+              aria-label="Fork rgehan/2d-world-generator on GitHub"
+            >
+              Fork
+            </a>
+          </div>
+          <div className="ml-2">
+            <a
+              className="github-button"
+              href="https://github.com/rgehan/2d-world-generator"
+              data-icon="octicon-star"
+              data-size="large"
+              data-show-count="false"
+              aria-label="Star rgehan/2d-world-generator on GitHub"
+            >
+              Star
+            </a>
+          </div>
+        </div>
         <div className="row">
-          <div className="col-12 col-md-6 mt-4">
+          <div className="col-12 col-md-6 mt-4 mt-md-0">
             <h4>Base</h4>
             <Slider
               label="Map Size"
@@ -104,7 +130,7 @@ export class App extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="col-12 col-md-6 mt-4">
+          <div className="col-12 col-md-6 mt-4 mt-md-0">
             <h4>Caves</h4>
             <Slider
               label="Initial caves count"
