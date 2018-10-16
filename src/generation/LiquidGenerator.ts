@@ -31,7 +31,7 @@ export class LiquidGenerator {
 
   _generateInitialLayer(thickness: number = 1) {
     for (let x = 0; x < this.map.length; x++) {
-      for (let i = 0; i < thickness; i++) {
+      for (let i = thickness - 1; i >= 0; i--) {
         this.particles.push({
           x,
           y: this.map[x].length - 1 - i,
@@ -69,7 +69,13 @@ export class LiquidGenerator {
         y--;
       }
 
-      // Move left/right if possible
+      particle.x = x;
+      particle.y = y;
+    }
+
+    // Move left/right if possible
+    for (const particle of this.particles) {
+      let { x, y } = particle;
 
       const left = this._getBlockTypeAt(x - 1, y);
       const particleLeft = this._hasParticleAt(x - 1, y);
