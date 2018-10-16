@@ -17,7 +17,7 @@ const PATTERNS = [
     probaDown: 0,
     pattern: [
       '     ',
-      '     ',
+      '  X  ',
       '  #  ',
       '     ',
       '     ',

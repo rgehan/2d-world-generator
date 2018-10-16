@@ -12,7 +12,7 @@ export function renderMap(map: Map, context: CanvasRenderingContext2D) {
     for (let y = 0; y < map[x].length; y++) {
       const blockValue = map[x][y];
 
-      context.fillStyle = blockValue === 1 ? 'green' : 'blue';
+      context.fillStyle = blockValue === 1 ? '#564841' : '#3c92e8';
 
       context.fillRect(
         x * blockSize,
