@@ -11,6 +11,7 @@ const STEPS: Step[] = [
   { blockId: 2, size: 0.3, amount: 0.3 },
   { blockId: 3, size: 0.08, amount: 0.07 },
   { blockId: 4, size: 0.09, amount: 0.085 },
+  { blockId: 5, size: 0.12, amount: 0.1 },
 ];
 
 export class OreGenerator {

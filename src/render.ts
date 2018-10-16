@@ -5,7 +5,9 @@ const ID_TO_COLOR: { [k: number]: string } = {
   1: '#564841', // Dirt
   2: '#686a6d', // Stone
   3: '#ce9627', // Gold
-  4: '#96613c', // Gold
+  4: '#96613c', // Copper
+  5: '#333333', // Coal
+  6: '#4b771f', // Grass
 };
 
 export function renderMap(map: Map, context: CanvasRenderingContext2D) {

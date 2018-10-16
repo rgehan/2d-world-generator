@@ -73,8 +73,9 @@ export class MapGenerator {
       const height = heightMap[x];
       const steppedHeight = Math.ceil(height * targetHeight);
       map[x] = [
-        ...Array(steppedHeight).fill(1),
-        ...Array(targetHeight - steppedHeight).fill(0),
+        ...Array(steppedHeight - 1).fill(1),
+        6,
+        ...Array(targetHeight - 1 - steppedHeight).fill(0),
       ];
     }
 

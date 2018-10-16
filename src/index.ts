@@ -8,7 +8,7 @@ import { getCanvasContext } from './utils';
 
 const mapGenerator = new MapGenerator();
 
-let map = mapGenerator.generate(7, 0.6, 0.7);
+let map = mapGenerator.generate(7, 0.6, 0.6);
 map = new OreGenerator(map).generate();
 map = new CaveGenerator(map).generate();
 
