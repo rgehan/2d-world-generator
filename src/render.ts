@@ -1,18 +1,23 @@
 import { Map } from './generation/MapGenerator';
 import { Blocks, getBlockColor } from './Blocks';
 
+const MAX_CANVAS_HEIGHT = 500;
+
 export function renderMap(
   map: Map,
   backgroundMap: Map,
   container: HTMLDivElement
 ) {
   // Dimensions of the container
-  const { clientWidth: maxWidth, clientHeight: maxHeight } = container;
+  const { clientWidth: maxWidth } = container;
   const mapWidth = map.length;
   const mapHeight = map[0].length;
 
   // Compute the maximum size of a block
-  const blockSize = Math.floor(maxWidth / mapWidth);
+  const blockSize = Math.min(
+    Math.floor(maxWidth / mapWidth),
+    Math.floor(MAX_CANVAS_HEIGHT / mapHeight),
+  );
 
   // Remove an existing canvas
   const existingCanvas = container.querySelector('canvas');
