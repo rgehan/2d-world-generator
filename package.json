@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "parcel src/index.html",
-    "dev": "parcel serve src/index.html"
+    "clean": "rimraf dist/",
+    "build": "yarn clean && parcel build src/index.html",
+    "dev": "yarn clean && parcel serve src/index.html"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.117",
@@ -15,6 +16,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "parcel-bundler": "^1.10.3",
+    "rimraf": "^2.6.2",
     "sass": "^1.14.2",
     "typescript": "^3.1.3"
   },
