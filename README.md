@@ -1,5 +1,7 @@
 # [rgehan/2d-world-generator](https://github.com/rgehan/2d-world-generator)
 
+![Image](images/screenshot.png)
+
 This is a TypeScript implementation of a basic 2D world generator.
 
 It features:
