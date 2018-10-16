@@ -1,20 +1,17 @@
-function createCanvasContext(w: number, h: number): CanvasRenderingContext2D {
+function createCanvasContext(): CanvasRenderingContext2D {
   const canvas = document.createElement('canvas');
 
-  canvas.width = w;
-  canvas.height = h;
+  canvas.width = window.innerWidth - 20;
+  canvas.height = canvas.width / 16 * 10;
 
   document.body.appendChild(canvas);
 
   return canvas.getContext('2d');
 }
 
-export function getCanvasContext(
-  w: number,
-  h: number
-): CanvasRenderingContext2D {
+export function getCanvasContext(): CanvasRenderingContext2D {
   const canvas = document.querySelector('canvas');
-  return canvas ? canvas.getContext('2d') : createCanvasContext(w, h);
+  return canvas ? canvas.getContext('2d') : createCanvasContext();
 }
 
 export function clamp(value: number, min: number, max: number) {
