@@ -60,14 +60,14 @@ export class App extends React.Component {
     const { map, caves, water, trees } = this.state;
 
     return (
-      <div className="App">
+      <div className="App container-fluid">
         <div
-          className="App__CanvasContainer"
+          className="App__CanvasContainer row"
           ref={node => (this.container = node)}
         />
-        <div className="App__Controls">
-          <fieldset>
-            <legend>Base</legend>
+        <div className="row">
+          <div className="col-12 col-md-6 mt-4">
+            <h4>Base</h4>
             <Slider
               label="Map Size"
               value={map.size}
@@ -103,9 +103,9 @@ export class App extends React.Component {
               name="map.mapHeight"
               onChange={this.handleChange}
             />
-          </fieldset>
-          <fieldset>
-            <legend>Caves</legend>
+          </div>
+          <div className="col-12 col-md-6 mt-4">
+            <h4>Caves</h4>
             <Slider
               label="Initial caves count"
               value={caves.count}
@@ -124,9 +124,11 @@ export class App extends React.Component {
               name="caves.forkCapacity"
               onChange={this.handleChange}
             />
-          </fieldset>
-          <fieldset>
-            <legend>Water</legend>
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div className="col-12 col-md-6 mt-4">
+            <h4>Water</h4>
             <Slider
               label="Water amount"
               value={water.amount}
@@ -145,9 +147,9 @@ export class App extends React.Component {
               name="water.iterations"
               onChange={this.handleChange}
             />
-          </fieldset>
-          <fieldset>
-            <legend>Vegetation</legend>
+          </div>
+          <div className="col-12 col-md-6 mt-4">
+            <h4>Vegetation</h4>
             <Slider
               label="Trees probability"
               value={trees.probability}
@@ -157,7 +159,7 @@ export class App extends React.Component {
               name="trees.probability"
               onChange={this.handleChange}
             />
-          </fieldset>
+          </div>
         </div>
       </div>
     );

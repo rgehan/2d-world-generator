@@ -3,6 +3,10 @@
   flex-direction: column;
   margin-top: 10px;
 
+  &__Label {
+    margin-bottom: 0;
+  }
+
   &__InputContainer {
     display: flex;
 
