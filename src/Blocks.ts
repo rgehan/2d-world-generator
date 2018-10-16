@@ -7,6 +7,8 @@ export enum Blocks {
   COAL = 5,
   GRASS = 6,
   WATER = 7,
+  LEAF = 8,
+  DARKLEAF = 9,
 };
 
 const BLOCKS_COLORS = {
@@ -18,6 +20,8 @@ const BLOCKS_COLORS = {
   [Blocks.COAL]: '#333333',
   [Blocks.GRASS]: '#4b771f',
   [Blocks.WATER]: '#2d5c99',
+  [Blocks.LEAF]: '#4b771f',
+  [Blocks.DARKLEAF]: '#0f3f13',
 };
 
 export function getBlockColor(block: Blocks) {

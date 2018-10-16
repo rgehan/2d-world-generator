@@ -17,7 +17,7 @@ export class LiquidGenerator {
 
   generate() {
     // Generate n-thick layer of water on the map
-    this._generateInitialLayer(2);
+    this._generateInitialLayer(1);
 
     for (let i = 0; i < 1000; i++) {
       this._updateParticles();
