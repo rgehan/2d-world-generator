@@ -23,6 +23,7 @@ export class LiquidGenerator {
       this._updateParticles();
     }
 
+    this._cleanupParticles();
     this._applyParticles();
 
     return this.map;
@@ -36,6 +37,23 @@ export class LiquidGenerator {
           y: this.map[x].length - 1 - i,
         });
       }
+    }
+  }
+
+  _cleanupParticles() {
+    for (let i = 0; i < 10; i++) {
+      this.particles = this.particles.filter(particle => {
+        const { x, y } = particle;
+        const left = this._getBlockTypeAt(x - 1, y);
+        const particleLeft = this._hasParticleAt(x - 1, y);
+        const right = this._getBlockTypeAt(x + 1, y);
+        const particleRight = this._hasParticleAt(x + 1, y);
+
+        return (
+          (particleLeft || left !== Blocks.EMPTY) &&
+          (particleRight || right !== Blocks.EMPTY)
+        );
+      });
     }
   }
 
