@@ -7,13 +7,33 @@ import { LiquidGenerator } from './LiquidGenerator';
 import { TreeGenerator } from './TreeGenerator';
 import { Blocks } from '../Blocks';
 
-export function generate() {
+export interface GenerationConfiguration {
+  map: {
+    size: number,
+    level: number,
+    roughness: number,
+    mapHeight: number,
+  },
+  caves: {
+    count: number,
+    forkCapacity: number,
+  },
+  water: {
+    amount: number,
+    iterations: number,
+  },
+  trees: {
+    probability: number,
+  },
+};
+
+export function generate(config: GenerationConfiguration) {
   const mapGenerator = new MapGenerator();
   const originalMap = mapGenerator.generate({
-    size: 8,
-    level: 0.5,
-    roughness: 0.8,
-    mapHeight: 150,
+    size: config.map.size,
+    level: config.map.level,
+    roughness: config.map.roughness,
+    mapHeight: config.map.mapHeight,
   });
 
   let map = cloneDeep(originalMap);
@@ -28,19 +48,19 @@ export function generate() {
 
   // Generate caves
   map = new CaveGenerator(map).generate({
-    count: 30,
-    forkCapacity: 5,
+    count: config.caves.count,
+    forkCapacity: config.caves.forkCapacity,
   });
 
   // Generate liquids
   map = new LiquidGenerator(map).generate({
-    amount: 2,
-    iterations: 1000,
+    amount: config.water.amount,
+    iterations: config.water.iterations,
   });
 
   // Generate trees
   map = new TreeGenerator(map).generate({
-    proba: 0.3,
+    proba: config.trees.probability,
   });
 
   return {

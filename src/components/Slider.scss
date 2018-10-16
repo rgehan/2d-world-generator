@@ -1,0 +1,18 @@
+.Slider {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  &__InputContainer {
+    display: flex;
+
+    &-Input {
+      flex: 1;
+    }
+
+    &-Value {
+      width: 50px;
+      text-align: center;
+    }
+  }
+}
