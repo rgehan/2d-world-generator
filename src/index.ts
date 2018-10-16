@@ -1,14 +1,16 @@
 import {
   MapGenerator,
   CaveGenerator,
+  OreGenerator,
 } from './generation/index';
 import { renderMap } from './render';
 import { getCanvasContext } from './utils';
 
 const mapGenerator = new MapGenerator();
 
-const blankMap = mapGenerator.generate();
-const carvedMap = new CaveGenerator(blankMap).generate();
+let map = mapGenerator.generate(7, 0.6, 0.7);
+map = new OreGenerator(map).generate();
+map = new CaveGenerator(map).generate();
 
-const ctx = getCanvasContext(1000, 600);
-renderMap(carvedMap, ctx);
+const ctx = getCanvasContext(600, 400);
+renderMap(map, ctx);

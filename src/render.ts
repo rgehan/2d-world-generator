@@ -1,5 +1,13 @@
 import { Map } from './generation';
 
+const ID_TO_COLOR: { [k: number]: string } = {
+  0: '#3c92e8', // Void
+  1: '#564841', // Dirt
+  2: '#686a6d', // Stone
+  3: '#ce9627', // Gold
+  4: '#96613c', // Gold
+};
+
 export function renderMap(map: Map, context: CanvasRenderingContext2D) {
   const { width, height } = context.canvas;
 
@@ -12,7 +20,7 @@ export function renderMap(map: Map, context: CanvasRenderingContext2D) {
     for (let y = 0; y < map[x].length; y++) {
       const blockValue = map[x][y];
 
-      context.fillStyle = blockValue === 1 ? '#564841' : '#3c92e8';
+      context.fillStyle = ID_TO_COLOR[blockValue];
 
       context.fillRect(
         x * blockSize,

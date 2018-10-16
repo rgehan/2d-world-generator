@@ -85,6 +85,8 @@ export class CaveGenerator {
       this.tracers = this.tracers.filter(tracer => !tracer.isDone);
     }
 
+    this._replacePatternBorderWithVoid();
+
     return this.map;
   }
 
@@ -123,6 +125,15 @@ export class CaveGenerator {
 
 
         this.map[newX][newY] = symbol === '#' ? 0 : 9999;
+      }
+    }
+  }
+
+  _replacePatternBorderWithVoid() {
+    for (let x = 0; x < this.map.length; x++) {
+      for (let y = 0; y < this.map[x].length; y++) {
+        const blockValue = this.map[x][y];
+        this.map[x][y] = blockValue === 9999 ? 0 : blockValue;
       }
     }
   }

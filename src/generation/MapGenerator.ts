@@ -10,11 +10,11 @@ type HeightMap = number[];
 export type Map = number[][];
 
 export class MapGenerator {
-  generate() {
+  generate(size: number, level: number = 0.6, roughness: number = 0.8) {
     const heightMap = this._generateHeightMap({
-      size: 129,
-      level: 0.6,
-      roughness: 0.8,
+      size: 2 ** size + 1,
+      level,
+      roughness,
     });
 
     return this._convertHeightMapToBlocks(heightMap, 80);
@@ -26,7 +26,11 @@ export class MapGenerator {
    * @param options.size
    * @param options.roughness
    */
-  _generateHeightMap({ size, roughness, level = 0.5}: HeightMapGenerationSettings) {
+  _generateHeightMap({
+    size,
+    roughness,
+    level = 0.5,
+  }: HeightMapGenerationSettings) {
     const map: HeightMap = Array(size).fill(0);
     let stepSize = size - 1;
 
