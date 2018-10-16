@@ -2,7 +2,9 @@
 
 ![Image](images/screenshot.png)
 
-This is a TypeScript implementation of a basic 2D world generator.
+This is a basic 2D world generator, implemented in TypeScript. I had the idea for this after playing [MoonQuest](https://playmoonquest.com/).
+
+A live demo is available [here](https://random-2d-map-setkfeqgqm.now.sh/).
 
 It features:
 - Height map generation
