@@ -1,4 +1,4 @@
-import { Map } from './generation';
+import { Map } from './generation/MapGenerator';
 import { Blocks, getBlockColor } from './Blocks';
 
 export function renderMap(

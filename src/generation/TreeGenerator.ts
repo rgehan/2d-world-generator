@@ -1,6 +1,7 @@
+import { random } from 'lodash';
+
 import { Map } from './MapGenerator';
 import { Blocks } from '../Blocks';
-import { randomBetween } from '../utils';
 
 // prettier-ignore
 const TREE_PATTERNS = [
@@ -74,7 +75,7 @@ export class TreeGenerator {
     const mapWidth = this.map.length;
     const mapHeight = this.map[0].length;
 
-    const pattern = TREE_PATTERNS[randomBetween(0, TREE_PATTERNS.length)];
+    const pattern = TREE_PATTERNS[random(0, TREE_PATTERNS.length - 1)];
 
     for (let ty = 0; ty < pattern.length; ty++) {
       for (let tx = 0; tx < pattern[ty].length; tx++) {

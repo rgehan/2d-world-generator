@@ -1,4 +1,4 @@
-import { clamp } from '../utils';
+import { clamp } from 'lodash';
 import { Blocks } from '../Blocks';
 
 interface HeightMapGenerationSettings {

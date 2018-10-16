@@ -1,5 +1,6 @@
+import { random } from 'lodash';
+
 import { Map } from './MapGenerator';
-import { randomBetween } from '../utils';
 import { Blocks } from '../Blocks';
 
 const DIRECTIONS = [
@@ -150,8 +151,8 @@ export class CaveGenerator {
     let y: number;
 
     do {
-      x = randomBetween(0, this._getWidth());
-      y = randomBetween(0, this._getHeight());
+      x = random(0, this._getWidth() - 1);
+      y = random(0, this._getHeight() - 1);
     } while (!this.inGround(x, y));
 
     return new Tracer(x, y, 0, forkCapacity);
