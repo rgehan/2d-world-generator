@@ -1,16 +1,21 @@
 import { clamp } from '../utils';
+import { Blocks } from '../Blocks';
 
 interface HeightMapGenerationSettings {
   size: number;
-  roughness: number | Function;
   level: number;
+  roughness: number | Function;
 }
 
 type HeightMap = number[];
 export type Map = number[][];
 
 export class MapGenerator {
-  generate(size: number, level: number = 0.6, roughness: number = 0.8) {
+  generate({
+    size,
+    level = 0.6,
+    roughness = 0.8,
+  }: HeightMapGenerationSettings) {
     const heightMap = this._generateHeightMap({
       size: 2 ** size + 1,
       level,
@@ -73,9 +78,9 @@ export class MapGenerator {
       const height = heightMap[x];
       const steppedHeight = Math.ceil(height * targetHeight);
       map[x] = [
-        ...Array(steppedHeight - 1).fill(1),
-        6,
-        ...Array(targetHeight - 1 - steppedHeight).fill(0),
+        ...Array(steppedHeight - 1).fill(Blocks.DIRT),
+        Blocks.GRASS,
+        ...Array(targetHeight - 1 - steppedHeight).fill(Blocks.EMPTY),
       ];
     }
 

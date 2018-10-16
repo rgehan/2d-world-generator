@@ -1,5 +1,7 @@
-import { Map } from './MapGenerator';
 import SimplexNoise from 'simplex-noise';
+
+import { Map } from './MapGenerator';
+import { Blocks } from '../Blocks';
 
 type Step = {
   blockId: number,
@@ -8,10 +10,14 @@ type Step = {
 };
 
 const STEPS: Step[] = [
-  { blockId: 2, size: 0.3, amount: 0.3 },
-  { blockId: 3, size: 0.08, amount: 0.07 },
-  { blockId: 4, size: 0.09, amount: 0.085 },
-  { blockId: 5, size: 0.12, amount: 0.1 },
+  { blockId: Blocks.STONE, size: 0.3, amount: 0.3 },
+  { blockId: Blocks.GOLD, size: 0.08, amount: 0.07 },
+  { blockId: Blocks.COPPER, size: 0.09, amount: 0.085 },
+  { blockId: Blocks.COAL, size: 0.12, amount: 0.1 },
+];
+
+const BLOCKS_WHITELIST = [
+  Blocks.DIRT,
 ];
 
 export class OreGenerator {
@@ -35,7 +41,7 @@ export class OreGenerator {
       for (let y = 0; y < this.map[x].length; y++) {
         const val = this._getRandomValue(x, y, size);
 
-        if (val < amount && this.map[x][y] !== 0) {
+        if (val < amount && BLOCKS_WHITELIST.indexOf(this.map[x][y]) !== -1) {
           this.map[x][y] = blockId;
         }
       }

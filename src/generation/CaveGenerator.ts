@@ -1,5 +1,6 @@
 import { Map } from './MapGenerator';
 import { randomBetween } from '../utils';
+import { Blocks } from '../Blocks';
 
 const DIRECTIONS = [
   { x: 1, y: 0 },
@@ -124,7 +125,7 @@ export class CaveGenerator {
         }
 
 
-        this.map[newX][newY] = symbol === '#' ? 0 : 9999;
+        this.map[newX][newY] = symbol === '#' ? Blocks.EMPTY : 9999;
       }
     }
   }
@@ -163,7 +164,8 @@ export class CaveGenerator {
       return false;
     }
 
-    return this.map[x][y] !== 0;
+    const blockValue = this.map[x][y];
+    return blockValue !== Blocks.EMPTY;
   }
 }
 
