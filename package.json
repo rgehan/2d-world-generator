@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf dist/",
     "build": "yarn clean && parcel build src/index.html",
-    "dev": "yarn clean && parcel serve src/index.html"
+    "dev": "yarn clean && parcel serve src/index.html",
+    "start": "serve -l 80 dist/"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.117",
@@ -24,6 +25,7 @@
     "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "serve": "^10.0.2",
     "simplex-noise": "^2.4.0"
   }
 }
