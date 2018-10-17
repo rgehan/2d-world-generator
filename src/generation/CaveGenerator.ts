@@ -1,4 +1,4 @@
-import { random } from 'lodash';
+import { random } from '../random';
 
 import { Map } from './MapGenerator';
 import { Blocks } from '../Blocks';
@@ -151,8 +151,8 @@ export class CaveGenerator {
     let y: number;
 
     do {
-      x = random(0, this._getWidth() - 1);
-      y = random(0, this._getHeight() - 1);
+      x = random(0, this._getWidth());
+      y = random(0, this._getHeight());
     } while (!this.inGround(x, y));
 
     return new Tracer(x, y, 0, forkCapacity);

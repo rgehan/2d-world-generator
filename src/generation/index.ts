@@ -6,9 +6,11 @@ import { OreGenerator } from './OreGenerator';
 import { LiquidGenerator } from './LiquidGenerator';
 import { TreeGenerator } from './TreeGenerator';
 import { Blocks } from '../Blocks';
+import { seedRandom } from '../random';
 
 export interface GenerationConfiguration {
   map: {
+    seed: number,
     size: number,
     level: number,
     roughness: number,
@@ -28,6 +30,9 @@ export interface GenerationConfiguration {
 };
 
 export function generate(config: GenerationConfiguration) {
+  // Re-seed before generating so results are stable
+  seedRandom(config.map.seed);
+
   const mapGenerator = new MapGenerator();
   const originalMap = mapGenerator.generate({
     size: config.map.size,

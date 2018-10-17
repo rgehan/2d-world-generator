@@ -1,4 +1,4 @@
-import { random } from 'lodash';
+import { random } from '../random';
 
 import { Map } from './MapGenerator';
 import { Blocks } from '../Blocks';
@@ -75,7 +75,7 @@ export class TreeGenerator {
     const mapWidth = this.map.length;
     const mapHeight = this.map[0].length;
 
-    const pattern = TREE_PATTERNS[random(0, TREE_PATTERNS.length - 1)];
+    const pattern = TREE_PATTERNS[random(0, TREE_PATTERNS.length)];
 
     for (let ty = 0; ty < pattern.length; ty++) {
       for (let tx = 0; tx < pattern[ty].length; tx++) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { set, debounce } from 'lodash';
 
 import { Slider } from './Slider';
+import { Input } from './Input';
 import { generate, GenerationConfiguration } from '../generation';
 import { renderMap } from '../render';
 
@@ -10,6 +11,7 @@ import './App.scss';
 export class App extends React.Component {
   state: GenerationConfiguration = {
     map: {
+      seed: 1337,
       size: 8,
       level: 0.5,
       roughness: 0.8,
@@ -94,6 +96,12 @@ export class App extends React.Component {
         <div className="row">
           <div className="col-12 col-md-6 mt-4 mt-md-0">
             <h4>Base</h4>
+            <Input
+              label="Seed (number)"
+              name="map.seed"
+              value={map.seed}
+              onChange={this.handleChange}
+            />
             <Slider
               label="Map Size"
               value={map.size}
