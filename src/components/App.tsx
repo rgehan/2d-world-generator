@@ -29,7 +29,7 @@ const DEFAULT_CONFIG: GenerationConfiguration = {
   },
   water: {
     amount: 2,
-    iterations: 1000,
+    iterations: 250,
   },
   trees: {
     probability: 0.3,
