@@ -1,6 +1,7 @@
 import React from 'react';
 import { isEqual, chain, debounce } from 'lodash';
 import cx from 'classnames';
+import queryString from 'query-string';
 
 import { Slider } from './Slider';
 import { Input } from './Input';
@@ -76,8 +77,23 @@ export class App extends React.Component {
       .set(name, value)
       .value();
 
+    // Store the new config in the queryString
+    this.updateQueryString(queryString.stringify({
+      config: JSON.stringify(newConfig),
+    }));
+
+
     this.setState({ config: newConfig });
   };
+
+  updateQueryString(queryString: string) {
+    if (!history.pushState) {
+      return;
+    }
+
+    const newUrl = `${window.location.protocol}//${window.location.host + window.location.pathname}?${queryString}`;
+    history.pushState({ path: newUrl }, '', newUrl);
+  }
 
   render() {
     const { config, loading } = this.state;
