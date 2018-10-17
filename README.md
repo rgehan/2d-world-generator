@@ -1,10 +1,10 @@
-# [rgehan/2d-world-generator](https://github.com/rgehan/2d-world-generator)
+# rgehan/2d-world-generator
 
 ![Image](images/screenshot.png)
 
 This is a basic 2D world generator, implemented in TypeScript. I had the idea for this after playing [MoonQuest](https://playmoonquest.com/).
 
-A live demo is available [here](https://random-2d-map-setkfeqgqm.now.sh/).
+A live demo is available [here](https://2d-world-generator.now.sh/).
 
 It features:
 - Height map generation
