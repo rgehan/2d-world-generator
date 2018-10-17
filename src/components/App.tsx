@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEqual, chain, debounce } from 'lodash';
+import { isEqual, chain, debounce, defaults } from 'lodash';
 import cx from 'classnames';
 import queryString from 'query-string';
 
@@ -15,32 +15,40 @@ interface AppState {
   config: GenerationConfiguration;
 }
 
-export class App extends React.Component {
-  state: AppState = {
-    loading: true,
-    config: {
-      map: {
-        seed: 1337,
-        size: 8,
-        level: 0.5,
-        roughness: 0.8,
-        mapHeight: 150,
-      },
-      caves: {
-        count: 30,
-        forkCapacity: 5,
-      },
-      water: {
-        amount: 2,
-        iterations: 1000,
-      },
-      trees: {
-        probability: 0.3,
-      },
-    },
-  };
+const DEFAULT_CONFIG: GenerationConfiguration = {
+  map: {
+    seed: 1337,
+    size: 8,
+    level: 0.5,
+    roughness: 0.8,
+    mapHeight: 150,
+  },
+  caves: {
+    count: 30,
+    forkCapacity: 5,
+  },
+  water: {
+    amount: 2,
+    iterations: 1000,
+  },
+  trees: {
+    probability: 0.3,
+  },
+};
 
+export class App extends React.Component {
   container: HTMLDivElement;
+  state: AppState;
+
+  constructor(props: any) {
+    super(props);
+
+    const configFromQueryString = this._extractConfigFromQueryString();
+    this.state = {
+      loading: true,
+      config: defaults({}, configFromQueryString, DEFAULT_CONFIG),
+    };
+  }
 
   componentDidMount() {
     this.generateAndRenderMap();
@@ -78,21 +86,38 @@ export class App extends React.Component {
       .value();
 
     // Store the new config in the queryString
-    this.updateQueryString(queryString.stringify({
-      config: JSON.stringify(newConfig),
-    }));
-
+    this._writeConfigToQueryString(newConfig);
 
     this.setState({ config: newConfig });
   };
 
-  updateQueryString(queryString: string) {
+  _writeConfigToQueryString(config: GenerationConfiguration) {
     if (!history.pushState) {
       return;
     }
 
-    const newUrl = `${window.location.protocol}//${window.location.host + window.location.pathname}?${queryString}`;
+    const qs = queryString.stringify({
+      config: JSON.stringify(config),
+    });
+
+    const newUrl = `${window.location.protocol}//${window.location.host}${
+      window.location.pathname
+    }?${qs}`;
     history.pushState({ path: newUrl }, '', newUrl);
+  }
+
+  _extractConfigFromQueryString() {
+    const qs = queryString.parse(location.search);
+
+    if (!qs.config) {
+      return {};
+    }
+
+    try {
+      return JSON.parse(qs.config as string);
+    } catch (error) {
+      return {};
+    }
   }
 
   render() {
