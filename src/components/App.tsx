@@ -120,6 +120,11 @@ export class App extends React.Component {
     }
   }
 
+  randomizeSeed = () => {
+    const randomSeed = Math.floor(Math.random() * 10000);
+    this.handleChange('map.seed', randomSeed);
+  }
+
   render() {
     const { config, loading } = this.state;
     const { map, caves, water, trees } = config;
@@ -162,12 +167,16 @@ export class App extends React.Component {
         <div className="row">
           <div className="col-12 col-md-6 mt-4 mt-md-0">
             <h4>Base</h4>
-            <Input
-              label="Seed (number)"
-              name="map.seed"
-              value={map.seed}
-              onChange={this.handleChange}
-            />
+            <div className="d-flex flex-row align-items-end">
+              <Input
+                label="Seed (number)"
+                name="map.seed"
+                value={map.seed}
+                onChange={this.handleChange}
+                className="pr-2 flex-fill"
+              />
+              <button onClick={this.randomizeSeed}>Randomize</button>
+            </div>
             <Slider
               label="Map Size"
               value={map.size}
