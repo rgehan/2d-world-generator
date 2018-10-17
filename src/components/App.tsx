@@ -1,32 +1,41 @@
 import React from 'react';
-import { set, debounce } from 'lodash';
+import { isEqual, chain, debounce } from 'lodash';
+import cx from 'classnames';
 
 import { Slider } from './Slider';
 import { Input } from './Input';
 import { generate, GenerationConfiguration } from '../generation';
-import { renderMap } from '../render';
+import { renderMap, removeCanvas } from '../render';
 
 import './App.scss';
 
+interface AppState {
+  loading: boolean;
+  config: GenerationConfiguration;
+}
+
 export class App extends React.Component {
-  state: GenerationConfiguration = {
-    map: {
-      seed: 1337,
-      size: 8,
-      level: 0.5,
-      roughness: 0.8,
-      mapHeight: 150,
-    },
-    caves: {
-      count: 30,
-      forkCapacity: 5,
-    },
-    water: {
-      amount: 2,
-      iterations: 1000,
-    },
-    trees: {
-      probability: 0.3,
+  state: AppState = {
+    loading: true,
+    config: {
+      map: {
+        seed: 1337,
+        size: 8,
+        level: 0.5,
+        roughness: 0.8,
+        mapHeight: 150,
+      },
+      caves: {
+        count: 30,
+        forkCapacity: 5,
+      },
+      water: {
+        amount: 2,
+        iterations: 1000,
+      },
+      trees: {
+        probability: 0.3,
+      },
     },
   };
 
@@ -42,29 +51,45 @@ export class App extends React.Component {
     window.removeEventListener('resize', this.generateAndRenderMap);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_: any, prevState: AppState) {
     // Re-render the map whenever the parameters change
-    this.generateAndRenderMap();
+    if (!isEqual(this.state.config, prevState.config)) {
+      this.generateAndRenderMap();
+    }
   }
 
   generateAndRenderMap = debounce(() => {
-    const config = this.state;
-    const { map, backgroundMap } = generate(config);
-    renderMap(map, backgroundMap, this.container);
+    this.setState({ loading: true });
+    removeCanvas();
+
+    setTimeout(() => {
+      const { map, backgroundMap } = generate(this.state.config);
+      renderMap(map, backgroundMap, this.container);
+
+      this.setState({ loading: false });
+    }, 0);
   }, 500);
 
   handleChange = (name: string, value: number) => {
-    const newState = set(this.state, name, value);
-    this.setState(newState);
+    const newConfig = chain(this.state.config)
+      .cloneDeep()
+      .set(name, value)
+      .value();
+
+    this.setState({ config: newConfig });
   };
 
   render() {
-    const { map, caves, water, trees } = this.state;
+    const { config, loading } = this.state;
+    const { map, caves, water, trees } = config;
 
     return (
       <div className="App container-fluid">
         <div
-          className="App__CanvasContainer row"
+          className={cx(
+            'row App__CanvasContainer',
+            loading && 'App__CanvasContainer--Loading'
+          )}
           ref={node => (this.container = node)}
         />
         <div className="row p-2 flex-row justify-content-end">

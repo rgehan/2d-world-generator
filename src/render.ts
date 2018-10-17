@@ -72,3 +72,10 @@ export function renderMap(
     }
   }
 }
+
+export function removeCanvas() {
+  const canvas = document.querySelector('canvas');
+  if (canvas) {
+    canvas.remove();
+  }
+}

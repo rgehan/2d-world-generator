@@ -10,6 +10,7 @@
     "start": "serve -l 80 dist/"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/lodash": "^4.14.117",
     "@types/react": "^16.4.17",
     "@types/react-dom": "^16.0.9",
@@ -22,6 +23,7 @@
     "typescript": "^3.1.3"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

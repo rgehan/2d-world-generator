@@ -2,6 +2,22 @@
   &__CanvasContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
     background: black;
+    min-height: 400px;
+
+    &--Loading::after {
+      content: 'Generating...';
+      color: white;
+    }
+  }
+
+  &__Loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: white;
+    height: 400px;
   }
 }
