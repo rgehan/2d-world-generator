@@ -164,8 +164,8 @@ export class App extends React.Component {
             </a>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 col-md-6 mt-4 mt-md-0">
+        <div className="row pb-4">
+          <div className="col-12 col-md-6 col-lg-3 mt-0">
             <h4>Base</h4>
             <div className="d-flex flex-row align-items-end">
               <Input
@@ -213,7 +213,7 @@ export class App extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="col-12 col-md-6 mt-4 mt-md-0">
+          <div className="col-12 col-md-6 col-lg-3 mt-4 mt-md-0">
             <h4>Caves</h4>
             <Slider
               label="Initial caves count"
@@ -234,9 +234,7 @@ export class App extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-        </div>
-        <div className="row mb-4">
-          <div className="col-12 col-md-6 mt-4">
+          <div className="col-12 col-md-6 col-lg-3">
             <h4>Water</h4>
             <Slider
               label="Water amount"
@@ -257,7 +255,7 @@ export class App extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="col-12 col-md-6 mt-4">
+          <div className="col-12 col-md-6 col-lg-3">
             <h4>Vegetation</h4>
             <Slider
               label="Trees probability"
